@@ -10,15 +10,29 @@ $con = @new mysqli($host,
 
 if($con->connect_errno!=0)//if error connection in not equal to '0' so there is an error then...
 {
-    echo "Error: ".$con->connect_errno." Description: ".$con->error;
+    echo "Error: ".$con->connect_errno;
 }
 else
 {
     $login = $_POST['login'];
     $password = $_POST['password'];
 
-    echo "It's alive!";
+    $sql = "SELECT * FROM uzytkownicy WHERE user='$login' AND pass='$password'";
+    if($result = @$con->query($sql));
+    {
+        $how_many_users = $result->num_rows;
+        if($how_many_users>0)
+        {
+            $row = $result->fetch_assoc();//show me assoc table with results of query
+            $user = $row['user'];
 
+            $result->close();//close result! if you don't do it somewhere in the world little kitty will die
+
+            echo $user;
+        }else{
+
+        }
+    }
     $con->close();
 }
 
