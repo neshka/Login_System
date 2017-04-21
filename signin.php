@@ -29,7 +29,7 @@ else
 
             $result->close();//close result! if you don't do it somewhere in the world little kitty will die
 
-            echo $user;
+            header('Location: game.php');
         }else{
 
         }
