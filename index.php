@@ -14,7 +14,7 @@ It's what you know for sure that just ain't so."
 <br><br>
 Mark Twain
 <br><br><br><hr>
-<form>
+<form action="signin.php" method="post">
     <br>
     Login:<br><input type="text" name="login">
     <br><br>
