@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -23,5 +29,9 @@ Mark Twain
     <input type="submit" value="Sign in">
     <br><br><hr>
 </form>
+<?php
+if(isset($_SESSION['blad']))
+echo $_SESSION['blad'];
+?>
 </body>
 </html>

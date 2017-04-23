@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+
+?>
+
+
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -7,7 +14,14 @@
 </head>
 <body>
 <?php
-echo "Welcome ".$user."!";
+echo "<p>Welcome ".$_SESSION['user']."!";
+
+echo "<p><b>Wood:</b> ".$_SESSION['drewno'];
+echo "<p><b>Stone</b> ".$_SESSION['kamien'];
+echo "<p><b>Food</b> ".$_SESSION['zboze'];
+
+echo "<p><b>E-mail:</b> ".$_SESSION['mail'];
+echo "<p><b>Premium days:</b> ".$_SESSION['dnipremium'];
 ?>
 </body>
 </html>
