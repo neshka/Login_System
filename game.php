@@ -14,6 +14,7 @@ session_start();
 </head>
 <body>
 <?php
+echo "<a href='logout.php'>Log out</a>";
 echo "<p>Welcome ".$_SESSION['user']."!";
 
 echo "<p><b>Wood:</b> ".$_SESSION['drewno'];

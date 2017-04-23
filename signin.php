@@ -25,7 +25,10 @@ else
         $how_many_users = $result->num_rows;
         if($how_many_users>0)
         {
+            $_SESSION['login'] = true;
+
             $row = $result->fetch_assoc();//show me assoc table with results of query
+            $_SESSION['id'] = $row['id'];
             $_SESSION['user'] = $row['user'];//show me user name assoc with 'user' category in db
             $_SESSION['drewno'] = $row['drewno'];
             $_SESSION['kamien'] = $row['kamien'];
