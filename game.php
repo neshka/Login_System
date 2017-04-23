@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php
-
+echo "Welcome ".$user."!";
 ?>
 </body>
 </html>
