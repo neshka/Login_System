@@ -9,6 +9,7 @@ session_start();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Sign in if you dare</title>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 <hr>
@@ -21,9 +22,7 @@ Mark Twain
 <br><br><br><hr>
 <form method="post">
     <br>
-    Login:<br><input type="text" name="login">
-    <br><br>
-    Nickname:<br><input type="text" name="nick">
+    Login:<br><input type="text" name="nick">
     <br><br>
     Email:<br><input type="text" name="email">
     <br><br>
@@ -33,9 +32,10 @@ Mark Twain
     <br><br>
     <label>
       <input type="checkbox" name="regulations">I agree to terms.
-    </label>
-    <br><br>
-    <input type="submit" value="Log in">
+    </label><br><br>
+    <div class="g-recaptcha" data-sitekey="6LdZZB4UAAAAAFmZoMOGDwbFAVXc2s4UjyHP6zDn"></div>
+    <br>
+    <input type="submit" value="Sign in">
     <br><br><hr>
 </form>
 <?php
