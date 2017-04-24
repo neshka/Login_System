@@ -1,2 +1,3 @@
 # Login_System
-Login system to the site. Session. Injection SQL
+Login system. Session. Injection SQL.
+Registration form. Captcha. Hashing passwords
