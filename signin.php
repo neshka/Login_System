@@ -4,7 +4,22 @@ session_start();
 
 if(isset($_POST['email']))
 {
-    
+    //Successful validation
+    $all_ok = true;
+    //Correct nick
+    $nick = $_POST['nick'];
+    //length of the string
+    if((strlen($nick)<3) || (strlen($nick)>20))
+    {
+        $all_ok = false;
+        $_SESSION['e_nick']='Your nick has to have 3 to 20 characters.';
+    }
+    if($all_ok == true)
+    {
+        //all test are ok
+        echo 'validation complete'; exit();
+
+    }
 }
 
 ?>
@@ -16,6 +31,14 @@ if(isset($_POST['email']))
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Sign in if you dare</title>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <style>
+        .error
+        {
+            color: red;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
 <hr>
@@ -29,6 +52,15 @@ Mark Twain
 <form method="post">
     <br>
     Login:<br><input type="text" name="nick">
+
+    <?php
+        if(isset($_POST['e_nick']))
+        {
+            echo '<div class="error">'.$_SESSION['e_nick'].'</div>';
+            unset($_SESSION['e_nick']);
+        }
+    ?>
+
     <br><br>
     Email:<br><input type="text" name="email">
     <br><br>
