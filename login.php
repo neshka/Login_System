@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+if(!isset($_POST['login']) || (!isset($_POST['password'])))
+{
+    header('Location: index.php');
+    exit();
+}
+
 require_once "connect.php";//add file with database contain login and pass
 
 //creating connection with the database, object of mysqli class
@@ -18,9 +25,16 @@ else
     $login = $_POST['login'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM uzytkownicy WHERE user='$login' AND pass='$password'";
+    $login = htmlentities($login, ENT_QUOTES, "UTF-8");
+    $password = htmlentities($password, ENT_QUOTES, "UTF-8");
 
-    if($result = @$con->query($sql));//put result of checking the db using query to $result
+
+
+    if($result = @$con->query(
+        sprintf("SELECT * FROM uzytkownicy WHERE user='%s' AND pass='%s'",
+            mysqli_real_escape_string($con, $login),
+            mysqli_real_escape_string($con, $password))));
+
     {
         $how_many_users = $result->num_rows;
         if($how_many_users>0)

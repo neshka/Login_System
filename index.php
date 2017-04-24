@@ -25,13 +25,13 @@ It's what you know for sure that just ain't so."
 <br><br>
 Mark Twain
 <br><br><br><hr>
-<form action="signin.php" method="post">
+<form action="login.php" method="post">
     <br>
     Login:<br><input type="text" name="login">
     <br><br>
     Password:<br><input type="password" name="password">
     <br><br><br>
-    <input type="submit" value="Sign in">
+    <input type="submit" value="Log in">
     <br><br><hr>
 </form>
 <?php
