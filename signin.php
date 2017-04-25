@@ -25,8 +25,20 @@ if(isset($_POST['email'])) {
     if((filter_var($emailB, FILTER_SANITIZE_EMAIL)==false) || ($emailB!=$emailB))
     {
         $all_ok = false;
-        $_SESSION['e_email'] = "Please check you email address again. Something is wrong";
+        $_SESSION['e_email'] = 'Please check you email address again. Something is wrong';
     }
+
+    //checking if password is correct
+    $password1 = $_POST['password1'];
+    $password2 = $_POST['password2'];
+
+    if((strlen($password1)<8 || strlen(password1)>20))
+    {
+        $all_ok = false;
+        $_SESSION['e_password'] = 'Your password has to have 8 to 20 characters.';
+    }
+
+
     if($all_ok == true)
     {
         //all test are ok
@@ -87,6 +99,15 @@ Mark Twain
 
     <br><br>
     Password:<br><input type="password" name="password1">
+
+    <?php
+    if (isset($_SESSION['e_password']))
+    {
+        echo '<div class="error">'.$_SESSION['e_password'].'</div>';
+        unset($_SESSION['e_password']);
+    }
+    ?>
+
     <br><br>
     Repeat password:<br><input type="password" name="password2">
     <br><br>
