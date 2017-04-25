@@ -2,29 +2,31 @@
 
 session_start();
 
-if(isset($_POST['email']))
-{
+if(isset($_POST['email'])) {
     //Successful validation
     $all_ok = true;
     //Correct nick
     $nick = $_POST['nick'];
     //length of the string
-    if((strlen($nick)<3) || (strlen($nick)>20))
-    {
+    if ((strlen($nick) < 3) || (strlen($nick) > 20)) {
         $all_ok = false;
-        $_SESSION['e_nick']='Your login has to have 3 to 20 characters.';
+        $_SESSION['e_nick'] = 'Your login has to have 3 to 20 characters.';
     }
 
-    if(ctype_alnum($nick)==false)
-    {
+    if (ctype_alnum($nick) == false) {
         $all_ok = false;
-        $_SESSION['e_nick'] ='You can\'t use special characters in your login.';
+        $_SESSION['e_nick'] = 'You can\'t use special characters in your login.';
     }
 
     //checking if email is correct
     $email = $_POST['email'];
     $emailB = filter_var($email, FILTER_SANITIZE_EMAIL);
 
+    if((filter_var($emailB, FILTER_SANITIZE_EMAIL)==false) || ($emailB!=$emailB))
+    {
+        $all_ok = false;
+        $_SESSION['e_email'] = "Please check you email address again. Something is wrong";
+    }
     if($all_ok == true)
     {
         //all test are ok
@@ -73,7 +75,16 @@ Mark Twain
     }
     ?>
     <br><br>
-    Email:<br><input type="email" name="email">
+    Email:<br><input type="text" name="email">
+
+    <?php
+    if (isset($_SESSION['e_email']))
+    {
+        echo '<div class="error">'.$_SESSION['e_email'].'</div>';
+        unset($_SESSION['e_email']);
+    }
+    ?>
+
     <br><br>
     Password:<br><input type="password" name="password1">
     <br><br>
