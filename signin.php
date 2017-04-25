@@ -32,10 +32,16 @@ if(isset($_POST['email'])) {
     $password1 = $_POST['password1'];
     $password2 = $_POST['password2'];
 
-    if((strlen($password1)<8 || strlen(password1)>20))
+    if((strlen($password1)<8 || strlen($password1)>20))
     {
         $all_ok = false;
         $_SESSION['e_password'] = 'Your password has to have 8 to 20 characters.';
+    }
+
+    if($password1!=$password2)
+    {
+        $all_ok = false;
+        $_SESSION['e_password'] = 'Passwords don\'t match.';
     }
 
 
