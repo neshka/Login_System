@@ -12,12 +12,24 @@ if(isset($_POST['email']))
     if((strlen($nick)<3) || (strlen($nick)>20))
     {
         $all_ok = false;
-        $_SESSION['e_nick']='Your nick has to have 3 to 20 characters.';
+        $_SESSION['e_nick']='Your login has to have 3 to 20 characters.';
     }
+
+    if(ctype_alnum($nick)==false)
+    {
+        $all_ok = false;
+        $_SESSION['e_nick'] ='You can\'t use special characters in your login.';
+    }
+
+    //checking if email is correct
+    $email = $_POST['email'];
+    $emailB = filter_var($email, FILTER_SANITIZE_EMAIL);
+
     if($all_ok == true)
     {
         //all test are ok
-        echo 'validation complete'; exit();
+        echo 'validation complete';
+        exit();
 
     }
 }
@@ -54,17 +66,16 @@ Mark Twain
     Login:<br><input type="text" name="nick">
 
     <?php
-        if(isset($_POST['e_nick']))
-        {
-            echo '<div class="error">'.$_SESSION['e_nick'].'</div>';
-            unset($_SESSION['e_nick']);
-        }
+    if (isset($_SESSION['e_nick']))
+    {
+        echo '<div class="error">'.$_SESSION['e_nick'].'</div>';
+        unset($_SESSION['e_nick']);
+    }
     ?>
-
     <br><br>
-    Email:<br><input type="text" name="email">
+    Email:<br><input type="email" name="email">
     <br><br>
-    Password:<br><input type="password" name="password">
+    Password:<br><input type="password" name="password1">
     <br><br>
     Repeat password:<br><input type="password" name="password2">
     <br><br>
@@ -76,9 +87,5 @@ Mark Twain
     <input type="submit" value="Sign in">
     <br><br><hr>
 </form>
-<?php
-if(isset($_SESSION['blad']))
-echo $_SESSION['blad'];
-?>
 </body>
 </html>
