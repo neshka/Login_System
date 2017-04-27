@@ -44,6 +44,8 @@ if(isset($_POST['email'])) {
         $_SESSION['e_password'] = 'Passwords don\'t match.';
     }
 
+    $password_hash = password_hash($password1, PASSWORD_DEFAULT);
+    echo $password_hash; exit();
 
     if($all_ok == true)
     {

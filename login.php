@@ -26,14 +26,13 @@ else
     $password = $_POST['password'];
 
     $login = htmlentities($login, ENT_QUOTES, "UTF-8");
-    $password = htmlentities($password, ENT_QUOTES, "UTF-8");
+
 
 
 
     if($result = @$con->query(
-        sprintf("SELECT * FROM uzytkownicy WHERE user='%s' AND pass='%s'",
-            mysqli_real_escape_string($con, $login),
-            mysqli_real_escape_string($con, $password))));
+        sprintf("SELECT * FROM uzytkownicy WHERE user='%s'",
+            mysqli_real_escape_string($con, $login))));
 
     {
         $how_many_users = $result->num_rows;
