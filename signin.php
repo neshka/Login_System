@@ -53,25 +53,29 @@ if(isset($_POST['email'])) {
         $_SESSION['e_regulations'] = 'You have to accept terms and conditions.';
     }
 
+    //bot or not?
+    $secret = '6LdZZB4UAAAAAGH-iJbZ2wp5ng0FyWwyM3WR5YlM';
+
+    $check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
+
+    $answer = json_decode($check);
+
+    if($answer->success==false)
+    {
+        $all_ok = false;
+        $_SESSION['e_bot'] = 'Oh Bot, please confirm that you are human.';
+    }
+
+    require_once "connect.php";
+
+    
+
     if($all_ok == true)
     {
         //all test are ok
         echo 'validation complete';
         exit();
 
-    }
-
-    //bot or not?
-    $secret = '6LdZZB4UAAAAAGH-iJbZ2wp5ng0FyWwyM3WR5YlM';
-
-    $check = file_get_contents('https://google.com/recaptcha/api/siteverify?secret=.$secret.&response='.$_POST['g-recaptcha-response']);
-
-    $answer = json_decode($check);
-
-    if($answer->success==false);
-    {
-        $all_ok = false;
-        $_SESSION['e_bot'] = 'Oh Bot, please confirm that you are human.';
     }
 }
 
