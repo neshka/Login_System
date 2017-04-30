@@ -45,7 +45,13 @@ if(isset($_POST['email'])) {
     }
 
     $password_hash = password_hash($password1, PASSWORD_DEFAULT);
-    echo $password_hash; exit();
+
+    //if regulations are accepted
+    if(!isset($_POST['regulations']))
+    {
+        $all_ok = false;
+        $_SESSION['e_regulations'] = 'You have to accept terms and conditions.';
+    }
 
     if($all_ok == true)
     {
@@ -53,6 +59,19 @@ if(isset($_POST['email'])) {
         echo 'validation complete';
         exit();
 
+    }
+
+    //bot or not?
+    $secret = '6LdZZB4UAAAAAGH-iJbZ2wp5ng0FyWwyM3WR5YlM';
+
+    $check = file_get_contents('https://google.com/recaptcha/api/siteverify?secret=.$secret.&response='.$_POST['g-recaptcha-response']);
+
+    $answer = json_decode($check);
+
+    if($answer->success==false);
+    {
+        $all_ok = false;
+        $_SESSION['e_bot'] = 'Oh Bot, please confirm that you are human.';
     }
 }
 
@@ -120,9 +139,28 @@ Mark Twain
     Repeat password:<br><input type="password" name="password2">
     <br><br>
     <label>
-      <input type="checkbox" name="regulations">I agree to terms.
-    </label><br><br>
+      <input type="checkbox" name="regulations">I accept terms and conditions.
+    </label>
+
+    <?php
+    if (isset($_SESSION['e_regulations']))
+    {
+        echo '<div class="error">'.$_SESSION['e_regulations'].'</div>';
+        unset($_SESSION['e_regulations']);
+    }
+    ?>
+
+    <br><br>
     <div class="g-recaptcha" data-sitekey="6LdZZB4UAAAAAFmZoMOGDwbFAVXc2s4UjyHP6zDn"></div>
+
+    <?php
+    if (isset($_SESSION['e_bot']))
+    {
+        echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
+        unset($_SESSION['e_bot']);
+    }
+    ?>
+
     <br>
     <input type="submit" value="Sign in">
     <br><br><hr>
