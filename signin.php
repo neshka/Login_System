@@ -67,8 +67,42 @@ if(isset($_POST['email'])) {
     }
 
     require_once "connect.php";
+    mysqli_report(MYSQLI_REPORT_STRICT);
 
-    
+    try
+    {
+        $con = new mysqli($host,
+            $db_user,
+            $db_password,
+            $db_name);
+        if($con->connect_errno!=0)//if error connection in not equal to '0' so there is an error then; 0=false
+        {
+            throw new Exception(mysqli_connect_errno());
+        }
+        else
+        {
+            //im email exist already in DB
+            $result = $con->query("SELECT id FROM uzytkownicy WHERE email='$email'");
+
+            if(!$result)throw new Exception($con->error);
+            $how_many_mail = $result->num_rows;
+            if($how_many_mail>0)
+            {
+
+                $all_ok = false;
+                $_SESSION['e_email'] = 'That email is already in the base.';
+
+            }
+
+
+            $con->close();
+        }
+    }
+    catch(Exception $e)
+    {
+        echo "<span style='color: red;'>Server error. Sorry for the inconvenience. Please try again later.</span>";
+        echo "<br>Info for developer: ".$e;
+    }
 
     if($all_ok == true)
     {
