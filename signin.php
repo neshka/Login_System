@@ -94,6 +94,33 @@ if(isset($_POST['email'])) {
 
             }
 
+            //im login exist already in DB
+            $result = $con->query("SELECT id FROM uzytkownicy WHERE user='$nick'");
+
+            if(!$result)throw new Exception($con->error);
+            $how_many_nick = $result->num_rows;
+            if($how_many_nick>0)
+            {
+
+                $all_ok = false;
+                $_SESSION['e_nick'] = 'Someone use that nick before and it\'s already in the base. Sorry';
+
+            }
+
+            if($all_ok == true)
+            {
+                if ($con->query("INSERT INTO uzytkownicy VALUES (NULL, '$nick', '$password_hash', '$email', 100, 100, 100, 14)"))
+                {
+                    $_SESSION['signindone']=true;
+                    header('Location: welcome.php');
+                }
+                else
+                {
+                    throw new Exception($con->error);
+                }
+
+            }
+
 
             $con->close();
         }
@@ -104,13 +131,6 @@ if(isset($_POST['email'])) {
         echo "<br>Info for developer: ".$e;
     }
 
-    if($all_ok == true)
-    {
-        //all test are ok
-        echo 'validation complete';
-        exit();
-
-    }
 }
 
 ?>
