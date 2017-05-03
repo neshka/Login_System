@@ -109,7 +109,7 @@ if(isset($_POST['email'])) {
 
             if($all_ok == true)
             {
-                if ($con->query("INSERT INTO uzytkownicy VALUES (NULL, '$nick', '$password_hash', '$email', 100, 100, 100, 14)"))
+                if ($con->query("INSERT INTO uzytkownicy VALUES (NULL, '$nick', '$password_hash', '$email', 100, 100, 100, now() + INTERVAL 14 DAY)"))
                 {
                     $_SESSION['signindone']=true;
                     header('Location: welcome.php');

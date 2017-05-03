@@ -27,7 +27,17 @@ echo "<p><b>Stone</b> ".$_SESSION['kamien'];
 echo "<p><b>Food</b> ".$_SESSION['zboze'];
 
 echo "<p><b>E-mail:</b> ".$_SESSION['mail'];
-echo "<p><b>Premium days:</b> ".$_SESSION['dnipremium'];
+echo "<p><b>Premium profile expiration date:</b> ".$_SESSION['dnipremium']."<p>";
+
+$date = new DateTime('2017-01-01 09:30:15');
+
+echo 'Date and the server\'s time: '.$date->format('Y-m-d H:i:s')."<br>";
+
+$theend = DateTime::createFromFormat
+
+
+
+
 ?>
 </body>
 </html>
