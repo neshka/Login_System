@@ -29,7 +29,7 @@ echo "<p><b>Food</b> ".$_SESSION['zboze'];
 echo "<p><b>E-mail:</b> ".$_SESSION['mail'];
 echo "<p><b>Premium profile expiration date:</b> ".$_SESSION['dnipremium']."<p>";
 
-$date = new DateTime('2167-01-30 09:30:15');
+$date = new DateTime();
 
 echo 'Date and the server\'s time: '.$date->format('Y-m-d H:i:s')."<br>";
 
@@ -41,11 +41,6 @@ if($date<$theend)
     echo "You still have premium account for: ".$differenceTime->format('%y year, %m moths, %d days, %h hours, %i minutes, %s sek');
 else
     echo "Premium is not active from: ".$differenceTime->format('%y year, %m moths, %d days, %h hours, %i minutes, %s sek');
-
-
-
-
-
 
 ?>
 </body>

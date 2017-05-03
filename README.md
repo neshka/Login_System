@@ -1,6 +1,6 @@
 # Login_System
 
-In this project you will find (among others):
+In this project you will find i.a.:
 
 Login system.
 Session.
